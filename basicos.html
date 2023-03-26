@@ -176,6 +176,53 @@
     //NaN - Not a Number
     let noEsUnNumero = "hola" * 3.7;
     console.log(noEsUnNumero);
+
+    // FUNCIONES
+
+    // Función Declarada
+    function estoEsUnaFuncion() {
+        console.log("Uno");
+        console.log("Dos");
+        console.log("Tres");
+    }
+    //Invocación de función
+    /* estoEsUnaFuncion();
+    estoEsUnaFuncion();
+    estoEsUnaFuncion();
+    estoEsUnaFuncion(); */
+
+    function unaFuncionQueDevuelveValor() {
+        console.log("Uno");
+        return 19; // se ignora todo lo que hay despues del return
+        console.log("Dos");
+        console.log("Tres");
+        return "La función ha retornado una Cadena de texto";
+    }
+
+    /* let valorDeFuncion = unaFuncionQueDevuelveValor();
+    console.log(valorDeFuncion); */
+
+    function saludar(nombre = "Desconocido", edad = 0) {
+        console.log(`Hola, mi nombre es ${nombre} y tengo ${edad} años.`);
+    }
+
+    saludar("kEnAi", 7);
+    saludar();
+
+    // Funciones declaradas VS Funciones expresadas
+
+    funcionDeclarada(); // Se puede llamar a la funcion independientemente de donde haya sido declarada. (Hoisting)
+
+    function funcionDeclarada() {
+        console.log("Esto es una función declarada, puede invocarse en cualquier parte de nuestro código, incluso antes de que la función sea declarada.");
+    }
+
+    //funcionExpresada();
+    const funcionExpresada = function () {
+        console.log("Esto es una funcion expresada, es decir, una función que se ha asignado como valor a una variable. Si invocamos esta función antes de su definición, javascript nos dirá: Uncaught ReferenceError: Cannot access 'funcionExpresada' before initialization");
+    }
+    funcionExpresada();
+    
     </script>
 </body>
 </html>
