@@ -309,6 +309,56 @@
     console.log(Object.values(jon));
     console.log(jon.hasOwnProperty("nombre"));
     console.log(jon.hasOwnProperty("nacimiento"));
+
+    /* Operadores */
+    /* Aritméticos: + - * / % () */
+    let opa = 5 + (5 - 10) * 3;
+    let modulo = 5 % 2; // resto de dividir 5 entre 2
+    console.log(opa);
+    console.log(modulo);
+
+    /* Relacionales > < >= <= == === != !== */
+    console.log(8 > 9); // devuelve false
+    console.log(9 > 8); // devuelve true
+    console.log(8 >= 9);
+    console.log(9 >= 8);
+    console.log(7 < 7);
+    console.log(7 <= 7); // devuelve true porque si es igual
+
+    // =   -> Asignación
+    // ==  -> Comparación de valores
+    // === -> Comparación de valores y tipos
+    console.log(7 == 7);
+    console.log("7" == 7); // utilizar == se considera mala práctica
+    console.log("7" === 7);
+    console.log(0 === false);
+
+    /* Incremento Decremento += -= /= *= */
+    let i = 2;
+
+    console.log(i++); // se incrementa despues de pasar el valor.
+    console.log(++i); // se incrementa antes de pasar el valor.
+
+    //i = i+2;
+    //i+=2;
+    console.log(i);
+
+    // operador unario i++ ++i i-- --i
+    i++;
+    i--;
+    ++i;
+    --i;
+    console.log(i);
+
+    /* OPERADORES LÓGICOS 
+    !  - Not -> Negación, lo que es verdadero pasa a ser falso y al reves
+    || - Or  -> Si al menos una es true, da true.
+    && - And -> Deben dar true ambas partes para dar true.
+    */
+    console.log(!true);
+    console.log(!false);
+    console.log((9 === 9) || ("9" === 9));
+    console.log((9 === 9) && ("9" === 9));
     </script>
 </body>
 </html>
