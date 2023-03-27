@@ -222,7 +222,43 @@
         console.log("Esto es una funcion expresada, es decir, una función que se ha asignado como valor a una variable. Si invocamos esta función antes de su definición, javascript nos dirá: Uncaught ReferenceError: Cannot access 'funcionExpresada' before initialization");
     }
     funcionExpresada();
+
+    // Arreglos (Arrays)
+    const arr = [];
+    const arrb = [1, true, "Hola", ["A", "B", "C", [1, 2, 3]]];
+    console.log(arr);
+    console.log(arrb);
+    console.log(arrb.length);
+    console.log(arrb[2]);
+    console.log(arrb[0]);
+    console.log(arrb[3]);
+    console.log(arrb[3][2]);
+    console.log(arrb[3][3][0]);
+
+    const arrc = Array.of("X", "Y", "Z", 9, 8, 7);
+    console.log(arrc);
+
+    const arrd = Array(100).fill(false);
+    console.log(arrd);
     
+    const e = new Array();
+    console.log(e);
+
+    const arrf = new Array(1,2,3,true,false);
+    console.log(arrf);
+
+    const coloresArr = ["Rojo", "Verde", "Azul"];
+
+    console.log(coloresArr);
+    coloresArr.push("Negro");
+    console.log(coloresArr);
+
+    coloresArr.pop();
+    console.log(coloresArr);
+
+    coloresArr.forEach(function (el, index){
+        console.log(`<li id="${index}">${el}</li>`);
+    })
     </script>
 </body>
 </html>
