@@ -359,6 +359,86 @@
     console.log(!false);
     console.log((9 === 9) || ("9" === 9));
     console.log((9 === 9) && ("9" === 9));
+
+    // ESTRUCTURAS DE CONTROL
+    /* Hasta ahora hemos estado ejecutando sentencias 
+    de manera secuencial (Estructura secuencial). Es decir, una detrás de otra*/
+
+    // Estructuras condicionales
+    /* if - else */
+
+    let edad = 17;
+    if (edad > 17) {
+        console.log("Eres mayor de edad");
+    }else{
+        console.log("Eres menor de edad");
+    }
+
+    if (edad >= 18) {
+        console.log("Eres mayor de edad");
+    }else{
+        console.log("Eres menor de edad");
+    }
+
+    if (edad < 18) {
+        console.log("Eres menor de edad");
+    }else{
+        console.log("Eres mayor de edad");
+    }
+
+    if (edad <= 17) {
+        console.log("Eres menor de edad");
+    }else{
+        console.log("Eres mayor de edad");
+    }
+
+    /* if-else if-else (anidados) */
+
+
+    /* Operador Ternario (condición) ? verdadero : falso */
+    // es un if-else simplificado para instrucciones de una sola linea.
+    console.log("Operador Ternario");
+    let eresMayor = (edad >= 18) ? "Eres mayor de edad":"Eres menor de edad";
+    console.log(eresMayor);
+
+    /* switch - case */
+    // para elegir entre casos determinados de valores de la variable
+    /* 
+    domingo - 0
+    lunes   - 1
+    martes  - 2
+    miercoles 3
+    jueves    4
+    viernes   5
+    sabado    6
+    */
+    let dia = 20;
+    switch (dia) {
+        case 0:
+            console.log("Domingo");
+            break;
+        case 1:
+            console.log("Lunes");
+            break;
+        case 2:
+            console.log("Martes");
+            break;
+        case 3:
+            console.log("Miércoles");
+            break;
+        case 4:
+            console.log("Jueves");
+            break;
+        case 5:
+            console.log("Viernes");
+            break;
+        case 6:
+            console.log("Sábado");
+            break;
+        default:
+            console.log("El dia no existe");
+            break;
+    }
     </script>
 </body>
 </html>
