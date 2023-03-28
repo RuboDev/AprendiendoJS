@@ -524,6 +524,31 @@
         }
         console.log(numeros1[i]);
       }
+
+      // LA DESESTRUCTURACIÓN - Revisar en MDN para más info
+      const numeros2 = [1, 2, 3];
+
+      // Sin destructuración
+      let uno = numeros2[0],
+        dos = numeros2[1],
+        tres = numeros2[2];
+
+      console.log(uno, dos, tres);
+
+      // Con destructuración
+
+      const [one, two, three] = numeros2;
+
+      console.log(one, two, three);
+
+      let persona = {
+        nombree: "Jon",
+        apellidoo: "MirCha",
+        edad1: 35,
+      };
+
+      let { nombree, apellidoo, edad1 } = persona;
+      console.log(nombre, apellido, edad);
     </script>
   </body>
 </html>
