@@ -513,6 +513,17 @@
       } catch (error) {
         console.log(`Se produjo el siguiente error: ${error}`);
       }
+
+      // break & continue
+
+      const numeros1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+      for (let i = 0; i < numeros1.length; i++) {
+        if (i === 5) {
+          //break; sale del bucle por completo
+          continue; // salta y no se ejecuta el codigo por debajo en esa iteración.
+        }
+        console.log(numeros1[i]);
+      }
     </script>
   </body>
 </html>
