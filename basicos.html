@@ -550,58 +550,103 @@
       //   let { nombree, apellidoo, edad1 } = persona;
       //   console.log(nombre, apellido, edad);
 
-      // Objetos no literales vs literales
-      let nombre = "kEnAi",
-        edad = 7;
+      // // Objetos no literales vs literales
+      // let nombre = "kEnAi",
+      //   edad = 7;
 
-      const perro = {
-        nombre: nombre,
-        edad: edad,
-        ladrar: function () {
-          console.log("guauu guauu!!!");
-        },
+      // const perro = {
+      //   nombre: nombre,
+      //   edad: edad,
+      //   ladrar: function () {
+      //     console.log("guauu guauu!!!");
+      //   },
+      // };
+
+      // console.log(perro);
+      // perro.ladrar();
+
+      // // en forma literal
+      // const dog = {
+      //   nombre,
+      //   edad,
+      //   raza: "Callejero",
+      //   ladrar() {
+      //     console.log("guauu guauu guauu!!!");
+      //   },
+      // };
+
+      // console.log(dog);
+      // dog.ladrar();
+
+      // // parámetros rest vs operador spread
+
+      // // parámetros rest aglutinan el resto de parámetros en una variable
+      // // operador spread reparte cada posicion de un arreglo en diferentes variables o otras posiciones de otro arreglo.
+
+      // function sumar(a, b, ...c) {
+      //   let resultado = a + b;
+      //   c.forEach(function (n) {
+      //     resultado += n;
+      //   });
+      //   return resultado;
+      // }
+
+      // console.log(sumar(1, 2));
+      // console.log(sumar(1, 2, 3));
+      // console.log(sumar(1, 2, 3, 4));
+      // console.log(sumar(1, 2, 3, 4, 5));
+
+      // const arr1 = [1, 2, 3, 4, 5],
+      //   arr2 = [6, 7, 8, 9, 0];
+      // console.log(arr1, arr2);
+
+      // const arr3 = [...arr1, ...arr2];
+      // console.log(arr3);
+
+      // ARROW FUNCTIONS (No utilizar en objetos literales)
+      // Nos permiten ahorrar en sintaxis, haces lo mismo con menos.
+
+      /* const saludar = () => console.log("Hola");
+      saludar(); */
+
+      const saludar = (nombre) => console.log(`Hola ${nombre}`); // return implícito
+      saludar("Juanito");
+
+      /* const sumar = function (a, b) {
+        return a + b; // return explícito
+      }; */
+
+      const sumar = (a, b) => a + b;
+
+      console.log(sumar(9, 9));
+
+      const funcionDeVariasLineas = () => {
+        console.log("Uno");
+        console.log("Dos");
+        console.log("Tres");
       };
 
-      console.log(perro);
-      perro.ladrar();
+      funcionDeVariasLineas();
 
-      // en forma literal
-      const dog = {
-        nombre,
-        edad,
-        raza: "Callejero",
-        ladrar() {
-          console.log("guauu guauu guauu!!!");
-        },
-      };
+      const numeros = [1, 2, 3, 4, 5];
 
-      console.log(dog);
-      dog.ladrar();
+      numeros.forEach((el, index) => {
+        console.log(`El elemento ${el} esta en la posición ${index}`);
+      });
 
-      // parámetros rest vs operador spread
-
-      // parámetros rest aglutinan el resto de parámetros en una variable
-      // operador spread reparte cada posicion de un arreglo en diferentes variables o otras posiciones de otro arreglo.
-
-      function sumar(a, b, ...c) {
-        let resultado = a + b;
-        c.forEach(function (n) {
-          resultado += n;
-        });
-        return resultado;
+      /* function perro() {
+        console.log(this);
       }
 
-      console.log(sumar(1, 2));
-      console.log(sumar(1, 2, 3));
-      console.log(sumar(1, 2, 3, 4));
-      console.log(sumar(1, 2, 3, 4, 5));
+      perro(); */
 
-      const arr1 = [1, 2, 3, 4, 5],
-        arr2 = [6, 7, 8, 9, 0];
-      console.log(arr1, arr2);
-
-      const arr3 = [...arr1, ...arr2];
-      console.log(arr3);
+      const perro = {
+        nombre: "kenai",
+        ladrar: function () {
+          console.log(this);
+        },
+      };
+      perro.ladrar();
     </script>
   </body>
 </html>
