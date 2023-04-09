@@ -305,3 +305,37 @@ $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
 //$cards.append($newCard);
 //$cards.before($newCard);
 //$cards.after($newCard);
+
+
+/* Tipos de Eventos */
+
+/* esta funcion es invocada por un evento de 
+atributo html: onclick */
+function holaMundo() {
+  alert("Hola Mundo");
+  console.log(event);
+}
+
+/* Evento semantico -> asignando la funcion a ejecutar en la
+  propiedad onclick del elemento sin () para que no ejecute al cargar.
+  Esta forma de manejar eventos tiene la limitación de que a
+  la propiedad del evento solo se le puede asignar una funcion. 
+  Ej.: onclick -ver abajo- solo puede almacenar una función.
+*/
+const $eventoSemantico = document.getElementById("evento-semantico");
+/* $eventoSemantico.onclick = holaMundo;
+$eventoSemantico.onclick = function (e) {
+  alert("Hola Mundo Manejador de Eventos Semántico");
+  console.log(e); */
+  //console.log(event); se suele abreviar a e
+
+  // Evento con Manejador Multiple
+  /* Como vemos abajo ara un mismo evento tenemos dos funciones*/
+  const $eventoMultiple = document.getElementById("evento-multiple");
+  $eventoMultiple.addEventListener('click', holaMundo);
+  $eventoMultiple.addEventListener('click', (e) =>{
+    alert("Hola Mundo Manejador de Eventos Múltiple");
+    console.log(e);
+    console.log(e.type);
+    console.log(e.target);
+  });
