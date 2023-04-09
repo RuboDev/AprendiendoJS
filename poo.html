@@ -55,7 +55,7 @@
         };
       } */
 
-      // Función constructora donde asignamos los métodos al
+      // Función constructora donde inicializamos los atributos. Los métodos al
       // prototipo, no a la función como tal.
       function Animal(nombre, genero) {
         //Atributos
@@ -63,7 +63,7 @@
         this.genero = genero;
       }
 
-      // Métodos agregados al prototipo e la función constructora
+      // Métodos agregados al prototipo
       Animal.prototype.sonar = function () {
         console.log("Hago sonidos porque estoy vivo");
       };
@@ -80,6 +80,83 @@
       snoopy.saludar();
       lolabunny.sonar();
       lolabunny.saludar();
+
+      const obj1 = { a: 1, b: 2 };
+      console.log(obj1);
+      const obj2 = Object.create(obj1);
+      console.log(obj2);
+
+      /* Documentandome acerca de Herencia y prototype - */
+
+      /* Clases y herencia*/
+      class Persona {
+        constructor(nombre) {
+          this.nombre = nombre;
+          this.funcion = function () {
+            console.log("Esta funcion hace cosas");
+          };
+        }
+      }
+
+      class Profesion extends Persona {
+        constructor(nombre) {
+          super(nombre);
+          this.antiguedad = 1;
+        }
+      }
+
+      const objProf = new Profesion("Miguel");
+      console.log(objProf);
+
+      /* getters y setters se declaran con palabras reservadas: get ý set ,
+      métodos estáticos con palabra static */
+
+      /* Objetos útiles: console - (Math - Date -> Documentado, muy parecido a Java)
+      console -> .clear() - .groupCollapsed() Ó .group() Ý .groupEnd() - .dir() - .table() - .time() Ý .timeEnd() - .count()
+      Math ->
+      Date -> los mas interesantes son los toLocale... ý Date.now() -> tiempo en ms desde 1ene1970 conocido como UNIX Time
+      Librería moment.js para manejar fechas.
+      */
+
+      /* **********     Curso JavaScript: 29. Operador de Cortocircuito - #jonmircha     ********** */
+      /*
+    Cortocircuito OR - cuando el valor de la izquierda en la expresión siempre pueda validar a true, es el valor que se cargará por defecto
+    Cortocircuito AND - cuando el valor de la izquierda en la expresión siempre pueda validar a false, es el valor que se cargará por defecto
+     */
+      /*  function saludar(nombre) {
+       nombre = nombre || "Desconocido";
+       console.log(`Hola ${nombre}`);
+     }*/
+
+      /* **********     Curso JavaScript: 30. alert, confirm y prompt - #jonmircha     ********** */
+      //console.log(window);
+      //alert("Hola esto es una alerta");
+      //confirm("Hola esto es una confirmación");
+      //prompt("Hola esto es un aviso y le permite al usuario ingresar un valor");
+
+      /* let alerta = alert("Hola esto es una alerta"),
+      confirmacion = confirm("Hola esto es una confirmación"),
+      aviso = prompt("Hola esto es un aviso y le permite al usuario ingresar un valor");
+    console.log(alerta);
+    console.log(confirmacion);
+    console.log(aviso);
+ */
+
+      /* **********     Curso JavaScript: 31. Expresiones Regulares - #jonmircha     ********** */
+      /*
+     Expresiones Regulares
+        Son una secuencia de caracteres que forma un patrón de búsqueda, principalmente utilizada para la búsqueda de patrones de cadenas de caracteres.
+        https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular
+        https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions
+    */
+
+      /*  let cadena = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fuga cupiditate dolores saepe, praesentium sit eaque recusandae id sapiente similique, laudantium voluptatum perferendis ea iure ad odio doloremque earum voluptate.";
+     let expReg = new RegExp("lorem", "ig");
+     console.log(expReg.test(cadena));
+     console.log(expReg.exec(cadena));
+     let expReg2 = /lorem{1,}/ig;
+     console.log(expReg2.test(cadena));
+     console.log(expReg2.exec(cadena)); */
     </script>
   </body>
 </html>
