@@ -339,3 +339,35 @@ $eventoSemantico.onclick = function (e) {
     console.log(e.type);
     console.log(e.target);
   });
+
+  /* Esta funcion se llama desde el cuerpo de la arrow function
+    y de esta manera conseguimos pasar parámetros dentro del
+    manejador
+  */
+  function saludar(nombre = "Desconocid@") {
+    alert(`Hola ${nombre}`);
+    console.log(event);
+  }
+  // Eventos con parámetros
+  $eventoMultiple.addEventListener("click", () => {
+    saludar()
+    saludar("Jon")
+  });
+
+  const $eventoRemover = document.getElementById("evento-remover");
+
+  /*Para eliminar un Manejador de eventos la funcion que maneja el
+  evento tiene que tener un identificador, no se pueden usar 
+  funciones anonimas ni arrow functions*/
+  const removerDobleClick = (e) => {
+    alert(`Removiendo el evento de tipo ${e.type}`);
+    console.log(e);
+    $eventoRemover.removeEventListener("dblclick", removerDobleClick);
+
+    /*Como estamos removiendo el propio manejador que remueve solo 
+    lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
+    el boton al hacerlo.*/
+    $eventoRemover.disabled = true;
+  };
+  
+  $eventoRemover.addEventListener("dblclick", removerDobleClick);
