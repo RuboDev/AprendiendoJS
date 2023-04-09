@@ -340,34 +340,58 @@ $eventoSemantico.onclick = function (e) {
     console.log(e.target);
   });
 
-  /* Esta funcion se llama desde el cuerpo de la arrow function
-    y de esta manera conseguimos pasar parámetros dentro del
-    manejador
-  */
-  function saludar(nombre = "Desconocid@") {
-    alert(`Hola ${nombre}`);
-    console.log(event);
-  }
-  // Eventos con parámetros
-  $eventoMultiple.addEventListener("click", () => {
-    saludar()
-    saludar("Jon")
-  });
+/* Esta funcion se llama desde el cuerpo de la arrow function
+  y de esta manera conseguimos pasar parámetros dentro del
+  manejador
+*/
+function saludar(nombre = "Desconocid@") {
+  alert(`Hola ${nombre}`);
+  console.log(event);
+}
+// Eventos con parámetros
+$eventoMultiple.addEventListener("click", () => {
+  saludar()
+  saludar("Jon")
+});
 
-  const $eventoRemover = document.getElementById("evento-remover");
+const $eventoRemover = document.getElementById("evento-remover");
 
-  /*Para eliminar un Manejador de eventos la funcion que maneja el
-  evento tiene que tener un identificador, no se pueden usar 
-  funciones anonimas ni arrow functions*/
-  const removerDobleClick = (e) => {
-    alert(`Removiendo el evento de tipo ${e.type}`);
-    console.log(e);
-    $eventoRemover.removeEventListener("dblclick", removerDobleClick);
+/*Para eliminar un Manejador de eventos la funcion que maneja el
+evento tiene que tener un identificador, no se pueden usar 
+funciones anonimas ni arrow functions*/
+const removerDobleClick = (e) => {
+  alert(`Removiendo el evento de tipo ${e.type}`);
+  console.log(e);
+  $eventoRemover.removeEventListener("dblclick", removerDobleClick);
 
-    /*Como estamos removiendo el propio manejador que remueve solo 
-    lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
-    el boton al hacerlo.*/
-    $eventoRemover.disabled = true;
-  };
-  
-  $eventoRemover.addEventListener("dblclick", removerDobleClick);
+  /*Como estamos removiendo el propio manejador que remueve solo 
+  lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
+  el boton al hacerlo.*/
+  $eventoRemover.disabled = true;
+};
+
+$eventoRemover.addEventListener("dblclick", removerDobleClick);
+
+
+// FLUJO DE EVENTOS - Como se propagan los eventos
+const $divsEventos = document.querySelectorAll(".eventos-flujo div");
+console.log($divsEventos);
+
+function flujoEventos(e) {
+  console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+}
+
+$divsEventos.forEach(div => {
+  // Fase de burbuja (sin explicitar tercer parametro o valor false)
+  // - de adentro hacia afuera
+  //div.addEventListener("click", flujoEventos);
+  //div.addEventListener("click", flujoEventos, false);
+
+  // Fase de captura - NO se suele usar este
+  // - invertido, aunque siguen sin escuchar los elementos internos
+  //div.addEventListener("click", flujoEventos, true);
+  div.addEventListener("click", flujoEventos, {
+    capture: false,
+    once: true
+  })
+})
