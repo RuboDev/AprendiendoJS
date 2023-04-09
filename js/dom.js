@@ -379,19 +379,27 @@ console.log($divsEventos);
 
 function flujoEventos(e) {
   console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+  e.stopPropagation(); // stopPropagation() - como su nombre indica, para la propagación del evento
 }
 
 $divsEventos.forEach(div => {
   // Fase de burbuja (sin explicitar tercer parametro o valor false)
   // - de adentro hacia afuera
-  //div.addEventListener("click", flujoEventos);
+  div.addEventListener("click", flujoEventos);
   //div.addEventListener("click", flujoEventos, false);
 
   // Fase de captura - NO se suele usar este
   // - invertido, aunque siguen sin escuchar los elementos internos
   //div.addEventListener("click", flujoEventos, true);
-  div.addEventListener("click", flujoEventos, {
+  /* div.addEventListener("click", flujoEventos, {
     capture: false,
     once: true
-  })
-})
+  }) */
+});
+
+const $linkEventos = document.querySelector(".eventos-flujo a");
+$linkEventos.addEventListener("click", (e) => {
+  alert("Hola, movidas into historias");
+  e.preventDefault();
+  e.stopPropagation();
+});
