@@ -307,99 +307,112 @@ $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
 //$cards.after($newCard);
 
 
-/* Tipos de Eventos */
+// /* Tipos de Eventos */
 
-/* esta funcion es invocada por un evento de 
-atributo html: onclick */
-function holaMundo() {
-  alert("Hola Mundo");
-  console.log(event);
-}
+// /* esta funcion es invocada por un evento de 
+// atributo html: onclick */
+// function holaMundo() {
+//   alert("Hola Mundo");
+//   console.log(event);
+// }
 
-/* Evento semantico -> asignando la funcion a ejecutar en la
-  propiedad onclick del elemento sin () para que no ejecute al cargar.
-  Esta forma de manejar eventos tiene la limitación de que a
-  la propiedad del evento solo se le puede asignar una funcion. 
-  Ej.: onclick -ver abajo- solo puede almacenar una función.
-*/
-const $eventoSemantico = document.getElementById("evento-semantico");
-/* $eventoSemantico.onclick = holaMundo;
-$eventoSemantico.onclick = function (e) {
-  alert("Hola Mundo Manejador de Eventos Semántico");
-  console.log(e); */
-  //console.log(event); se suele abreviar a e
+// /* Evento semantico -> asignando la funcion a ejecutar en la
+//   propiedad onclick del elemento sin () para que no ejecute al cargar.
+//   Esta forma de manejar eventos tiene la limitación de que a
+//   la propiedad del evento solo se le puede asignar una funcion. 
+//   Ej.: onclick -ver abajo- solo puede almacenar una función.
+// */
+// const $eventoSemantico = document.getElementById("evento-semantico");
+// /* $eventoSemantico.onclick = holaMundo;
+// $eventoSemantico.onclick = function (e) {
+//   alert("Hola Mundo Manejador de Eventos Semántico");
+//   console.log(e); */
+//   //console.log(event); se suele abreviar a e
 
-  // Evento con Manejador Multiple
-  /* Como vemos abajo ara un mismo evento tenemos dos funciones*/
-  const $eventoMultiple = document.getElementById("evento-multiple");
-  $eventoMultiple.addEventListener('click', holaMundo);
-  $eventoMultiple.addEventListener('click', (e) =>{
-    alert("Hola Mundo Manejador de Eventos Múltiple");
-    console.log(e);
-    console.log(e.type);
-    console.log(e.target);
-  });
+//   // Evento con Manejador Multiple
+//   /* Como vemos abajo ara un mismo evento tenemos dos funciones*/
+//   const $eventoMultiple = document.getElementById("evento-multiple");
+//   $eventoMultiple.addEventListener('click', holaMundo);
+//   $eventoMultiple.addEventListener('click', (e) =>{
+//     alert("Hola Mundo Manejador de Eventos Múltiple");
+//     console.log(e);
+//     console.log(e.type);
+//     console.log(e.target);
+//   });
 
-/* Esta funcion se llama desde el cuerpo de la arrow function
-  y de esta manera conseguimos pasar parámetros dentro del
-  manejador
-*/
-function saludar(nombre = "Desconocid@") {
-  alert(`Hola ${nombre}`);
-  console.log(event);
-}
-// Eventos con parámetros
-$eventoMultiple.addEventListener("click", () => {
-  saludar()
-  saludar("Jon")
-});
+// /* Esta funcion se llama desde el cuerpo de la arrow function
+//   y de esta manera conseguimos pasar parámetros dentro del
+//   manejador
+// */
+// function saludar(nombre = "Desconocid@") {
+//   alert(`Hola ${nombre}`);
+//   console.log(event);
+// }
+// // Eventos con parámetros
+// $eventoMultiple.addEventListener("click", () => {
+//   saludar()
+//   saludar("Jon")
+// });
 
-const $eventoRemover = document.getElementById("evento-remover");
+// const $eventoRemover = document.getElementById("evento-remover");
 
-/*Para eliminar un Manejador de eventos la funcion que maneja el
-evento tiene que tener un identificador, no se pueden usar 
-funciones anonimas ni arrow functions*/
-const removerDobleClick = (e) => {
-  alert(`Removiendo el evento de tipo ${e.type}`);
-  console.log(e);
-  $eventoRemover.removeEventListener("dblclick", removerDobleClick);
+// /*Para eliminar un Manejador de eventos la funcion que maneja el
+// evento tiene que tener un identificador, no se pueden usar 
+// funciones anonimas ni arrow functions*/
+// const removerDobleClick = (e) => {
+//   alert(`Removiendo el evento de tipo ${e.type}`);
+//   console.log(e);
+//   $eventoRemover.removeEventListener("dblclick", removerDobleClick);
 
-  /*Como estamos removiendo el propio manejador que remueve solo 
-  lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
-  el boton al hacerlo.*/
-  $eventoRemover.disabled = true;
-};
+//   /*Como estamos removiendo el propio manejador que remueve solo 
+//   lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
+//   el boton al hacerlo.*/
+//   $eventoRemover.disabled = true;
+// };
 
-$eventoRemover.addEventListener("dblclick", removerDobleClick);
+// $eventoRemover.addEventListener("dblclick", removerDobleClick);
 
 
-// FLUJO DE EVENTOS - Como se propagan los eventos
-const $divsEventos = document.querySelectorAll(".eventos-flujo div");
-console.log($divsEventos);
+// // FLUJO DE EVENTOS - Como se propagan los eventos
+// const $divsEventos = document.querySelectorAll(".eventos-flujo div");
+// console.log($divsEventos);
 
 function flujoEventos(e) {
-  console.log(`Hola te saluda ${this.className}, el click lo originó ${e.target.className}`);
+  console.log(`Hola te saluda ${this}, el click lo originó ${e.target.className}`);
   e.stopPropagation(); // stopPropagation() - como su nombre indica, para la propagación del evento
 }
 
-$divsEventos.forEach(div => {
-  // Fase de burbuja (sin explicitar tercer parametro o valor false)
-  // - de adentro hacia afuera
-  div.addEventListener("click", flujoEventos);
-  //div.addEventListener("click", flujoEventos, false);
+// $divsEventos.forEach(div => {
+//   // Fase de burbuja (sin explicitar tercer parametro o valor false)
+//   // - de adentro hacia afuera
+//   div.addEventListener("click", flujoEventos);
+//   //div.addEventListener("click", flujoEventos, false);
 
-  // Fase de captura - NO se suele usar este
-  // - invertido, aunque siguen sin escuchar los elementos internos
-  //div.addEventListener("click", flujoEventos, true);
-  /* div.addEventListener("click", flujoEventos, {
-    capture: false,
-    once: true
-  }) */
-});
+//   // Fase de captura - NO se suele usar este
+//   // - invertido, aunque siguen sin escuchar los elementos internos
+//   //div.addEventListener("click", flujoEventos, true);
+//   /* div.addEventListener("click", flujoEventos, {
+//     capture: false,
+//     once: true
+//   }) */
+// });
 
-const $linkEventos = document.querySelector(".eventos-flujo a");
-$linkEventos.addEventListener("click", (e) => {
-  alert("Hola, movidas into historias");
-  e.preventDefault();
-  e.stopPropagation();
+// const $linkEventos = document.querySelector(".eventos-flujo a");
+// $linkEventos.addEventListener("click", (e) => {
+//   alert("Hola, movidas into historias");
+//   e.preventDefault();
+//   e.stopPropagation();
+// });
+
+document.addEventListener("click", (e) => {
+  console.log(e.target);
+
+  if(e.target.matches(".eventos-flujo div")){
+    flujoEventos(e);
+  }
+
+  if(e.target.matches(".eventos-flujo a")){
+    alert("Hola, movidas into historias")
+    e.preventDefault();
+  }
 });
