@@ -418,7 +418,7 @@ document.addEventListener("click", (e) => {
 });
 
 /* MANEJO DEL BOM - Algunos eventos*/
-window.addEventListener("resize", (e) => {
+/* window.addEventListener("resize", (e) => {
   console.clear();
   console.log("********Evento Resize********");
   console.log(window.innerWidth);
@@ -450,9 +450,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   console.log(window.screenX);
   console.log(window.screenY);
   console.log(e);
-})
+}) */
 
-/* BOM: Métodos */
+/* BOM: Métodos de window */
 const $btnAbrir = document.getElementById("abrir-ventana"),
 $btnCerrar = document.getElementById("cerrar-ventana"),
 $btnImprimir = document.getElementById("imprimir-ventana");
@@ -471,3 +471,39 @@ $btnCerrar.addEventListener("click", (e) => {
 $btnImprimir.addEventListener("click", (e) => {
   window.print();
 });
+
+/* BOM: Objetos de window */
+
+/* Objeto URL */
+console.log("******Objeto URL(location)******");
+console.log(location); //window.location
+console.log(location.origin);
+console.log(location.protocol);
+console.log(location.host);
+console.log(location.hostname);
+console.log(location.port);
+console.log(location.href);
+console.log(location.hash);
+console.log(location.search);
+console.log(location.pathname);
+//location.reload();
+
+/* Objeto History */
+console.log("******Objeto Historial(history)******");
+console.log(history); // window.history
+// history.length -> cuantas páginas hemos visitado en esa pestaña.
+//history.back(1); // página anterior
+//history.forward(1); // página siguiente
+//history.go(-1); numeros positivos para siguiente, negativos para anterior
+
+/* Objeto Navigator */
+console.log(navigator);
+console.log(navigator.connection);
+console.log(navigator.geolocation);
+console.log(navigator.mediaDevices);
+console.log(navigator.mimeTypes);
+console.log(navigator.onLine);
+console.log(navigator.serviceWorker);
+console.log(navigator.storage);
+console.log(navigator.usb);
+console.log(navigator.userAgent);
