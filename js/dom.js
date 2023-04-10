@@ -417,7 +417,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* MANEJO DEL BOM */
+/* MANEJO DEL BOM - Algunos eventos*/
 window.addEventListener("resize", (e) => {
   console.clear();
   console.log("********Evento Resize********");
@@ -451,3 +451,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
   console.log(window.screenY);
   console.log(e);
 })
+
+/* BOM: Métodos */
+const $btnAbrir = document.getElementById("abrir-ventana"),
+$btnCerrar = document.getElementById("cerrar-ventana"),
+$btnImprimir = document.getElementById("imprimir-ventana");
+
+let ventana;
+// método open() de window
+$btnAbrir.addEventListener("click", (e) => {
+  ventana = window.open("https://jonmircha.com");
+});
+// método close() de window
+$btnCerrar.addEventListener("click", (e) => {
+  //window.close();
+  ventana.close();
+});
+
+$btnImprimir.addEventListener("click", (e) => {
+  window.print();
+});
