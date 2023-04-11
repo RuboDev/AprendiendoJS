@@ -10,7 +10,7 @@
     <h1>CRUD API REST AJAX</h1>
     <section class="crud">
       <article>
-        <h2 class="crud-title"></h2>
+        <h2 class="crud-title">Agregar entrada</h2>
         <form class="crud-form">
           <input type="text" name="nombre" placeholder="nombre" required />
           <br />
@@ -22,7 +22,7 @@
           />
           <br />
           <input type="submit" value="Enviar" />
-          <input type="hidden" name="id" />
+          <input type="hidden" name="accion" value="agregar" id="hidden" />
         </form>
       </article>
       <h2>Ver Santos</h2>
@@ -76,21 +76,83 @@
       };
 
       const success = (json) => {
-        console.log(json);
-        json.forEach((el) => {
-          $template.querySelector(".name").textContent = el.nombre;
-          $template.querySelector(".constellation").textContent =
-            el.constelacion;
-          let $clone = document.importNode($template, true);
-          $fragment.appendChild($clone);
-        });
+        let jsonArray = json;
+        if (JSON.stringify(json).charAt(0) === "{") {
+          jsonArray = [json];
+        }
+        console.log(jsonArray);
+        try {
+          jsonArray.forEach((el) => {
+            $template.querySelector(".name").textContent = el.nombre;
+            $template.querySelector(".constellation").textContent =
+              el.constelacion;
+            let $clone = document.importNode($template, true);
+            $fragment.appendChild($clone);
+          });
+        } catch (error) {
+          console.log(error);
+        }
         $table.appendChild($fragment);
       };
 
-      ajax({
-        url: "http://localhost:3000/santos",
-        method: "GET",
-        success: success,
+      $form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const nombre = formData.get("nombre"),
+          constelacion = formData.get("constelacion"),
+          accion = formData.get("accion");
+
+        const jsonData = {
+          id: null,
+          nombre: nombre,
+          constelacion: constelacion,
+        };
+
+        switch (accion) {
+          case "agregar":
+            ajax({
+              url: "http://localhost:3000/santos",
+              method: "POST",
+              success: success,
+              error: {},
+              data: jsonData,
+            });
+            break;
+
+          case "editar":
+            ajax({
+              url: "http://localhost:3000/santos/",
+              method: "PUT",
+              success: success,
+              error: {},
+              data: jsonData,
+            });
+
+            break;
+
+          default:
+            break;
+        }
+        $title.textContent = "Agregar entrada";
+        $form.querySelector("#hidden").value = "agregar";
+        $form.reset();
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target.className === "edit") {
+          $title.textContent = "Editar entrada";
+          $form.querySelector("#hidden").value = "editar";
+        }
+      });
+
+      d.addEventListener("DOMContentLoaded", (e) => {
+        ajax({
+          url: "http://localhost:3000/santos",
+          method: "GET",
+          success: success,
+          error: {},
+          data: null,
+        });
       });
     </script>
   </body>
