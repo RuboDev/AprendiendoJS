@@ -127,26 +127,15 @@
               data: jsonData,
             });
             break;
-
           case "editar":
             ajax({
               url: "http://localhost:3000/santos/" + jsonData.id,
               method: "PUT",
-              success: success,
+              success: () => location.reload(),
               error: errorFunc,
               data: jsonData,
             });
             break;
-
-          /* case "eliminar":
-            ajax({
-              url: "http://localhost:3000/santos/" + jsonData.id,
-              method: "DELETE",
-              success: () => location.reload(),
-              error: errorFunc,
-            }); 
-            break; */
-
           default:
             break;
         }
@@ -169,15 +158,12 @@
               .querySelector(".constellation").textContent;
 
           $form.querySelector('input[name="nombre"]').value = rowName;
-
           $form.querySelector('input[name="constelacion"]').value =
             rowConstellation;
           $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
         }
 
         if (e.target.matches(".delete")) {
-          //$title.textContent = "Eliminar entrada";
-
           $form.querySelector("#hidden").value = "eliminar";
 
           const rowName = e.target
@@ -185,14 +171,7 @@
               .querySelector(".name").textContent,
             rowConstellation = e.target
               .closest("tr")
-              .querySelector(".constellation").textContent; /*
-
-          $form.querySelector('input[name="nombre"]').value = rowName;
-
-          $form.querySelector('input[name="constelacion"]').value =
-            rowConstellation;
-
-          $form.querySelector("#hiddenId").value = e.target.closest("tr").id; */
+              .querySelector(".constellation").textContent;
 
           let isDelete = confirm(
             `Estás seguro de eliminar la entrada con id:${
