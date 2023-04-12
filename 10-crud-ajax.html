@@ -99,6 +99,10 @@
         }
       };
 
+      const errorFunc = (error) => {
+        alert(error);
+      };
+
       $form.addEventListener("submit", (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -119,7 +123,7 @@
               url: "http://localhost:3000/santos",
               method: "POST",
               success: success,
-              error: {},
+              error: errorFunc,
               data: jsonData,
             });
             break;
@@ -129,19 +133,19 @@
               url: "http://localhost:3000/santos/" + jsonData.id,
               method: "PUT",
               success: success,
-              error: {},
+              error: errorFunc,
               data: jsonData,
             });
             break;
 
-          case "eliminar":
+          /* case "eliminar":
             ajax({
               url: "http://localhost:3000/santos/" + jsonData.id,
               method: "DELETE",
-              success: success,
-              error: {},
-            });
-            break;
+              success: () => location.reload(),
+              error: errorFunc,
+            }); 
+            break; */
 
           default:
             break;
@@ -172,7 +176,8 @@
         }
 
         if (e.target.matches(".delete")) {
-          $title.textContent = "Eliminar entrada";
+          //$title.textContent = "Eliminar entrada";
+
           $form.querySelector("#hidden").value = "eliminar";
 
           const rowName = e.target
@@ -180,14 +185,30 @@
               .querySelector(".name").textContent,
             rowConstellation = e.target
               .closest("tr")
-              .querySelector(".constellation").textContent;
+              .querySelector(".constellation").textContent; /*
 
           $form.querySelector('input[name="nombre"]').value = rowName;
 
           $form.querySelector('input[name="constelacion"]').value =
             rowConstellation;
 
-          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
+          $form.querySelector("#hiddenId").value = e.target.closest("tr").id; */
+
+          let isDelete = confirm(
+            `Estás seguro de eliminar la entrada con id:${
+              e.target.closest("tr").id
+            }?
+Nombre: ${rowName}; Constelación: ${rowConstellation};`
+          );
+
+          if (isDelete) {
+            ajax({
+              url: "http://localhost:3000/santos/" + e.target.closest("tr").id,
+              method: "DELETE",
+              success: () => location.reload(),
+              error: errorFunc,
+            });
+          }
         }
       });
 
@@ -196,7 +217,7 @@
           url: "http://localhost:3000/santos",
           method: "GET",
           success: success,
-          error: {},
+          error: errorFunc,
           data: null,
         });
       });
