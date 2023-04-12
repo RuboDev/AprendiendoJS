@@ -23,6 +23,7 @@
           <br />
           <input type="submit" value="Enviar" />
           <input type="hidden" name="accion" value="agregar" id="hidden" />
+          <input type="hidden" name="id" value="" id="hiddenId" />
         </form>
       </article>
       <h2>Ver Santos</h2>
@@ -38,7 +39,7 @@
       </table>
     </section>
     <template id="crud-template">
-      <tr>
+      <tr id="">
         <td class="name"></td>
         <td class="constellation"></td>
         <td>
@@ -80,19 +81,22 @@
         if (JSON.stringify(json).charAt(0) === "{") {
           jsonArray = [json];
         }
-        console.log(jsonArray);
-        try {
-          jsonArray.forEach((el) => {
-            $template.querySelector(".name").textContent = el.nombre;
-            $template.querySelector(".constellation").textContent =
-              el.constelacion;
-            let $clone = document.importNode($template, true);
-            $fragment.appendChild($clone);
-          });
-        } catch (error) {
-          console.log(error);
+
+        if (Object.entries(json).length !== 0) {
+          try {
+            jsonArray.forEach((el) => {
+              $template.querySelector(".name").textContent = el.nombre;
+              $template.querySelector(".constellation").textContent =
+                el.constelacion;
+              $template.querySelector("tr").setAttribute("id", el.id);
+              let $clone = document.importNode($template, true);
+              $fragment.appendChild($clone);
+            });
+          } catch (error) {
+            console.log(error);
+          }
+          $table.appendChild($fragment);
         }
-        $table.appendChild($fragment);
       };
 
       $form.addEventListener("submit", (e) => {
@@ -100,10 +104,11 @@
         const formData = new FormData(e.target);
         const nombre = formData.get("nombre"),
           constelacion = formData.get("constelacion"),
-          accion = formData.get("accion");
+          accion = formData.get("accion"),
+          dataid = formData.get("id");
 
         const jsonData = {
-          id: null,
+          id: dataid,
           nombre: nombre,
           constelacion: constelacion,
         };
@@ -121,13 +126,21 @@
 
           case "editar":
             ajax({
-              url: "http://localhost:3000/santos/",
+              url: "http://localhost:3000/santos/" + jsonData.id,
               method: "PUT",
               success: success,
               error: {},
               data: jsonData,
             });
+            break;
 
+          case "eliminar":
+            ajax({
+              url: "http://localhost:3000/santos/" + jsonData.id,
+              method: "DELETE",
+              success: success,
+              error: {},
+            });
             break;
 
           default:
@@ -135,13 +148,46 @@
         }
         $title.textContent = "Agregar entrada";
         $form.querySelector("#hidden").value = "agregar";
+        $form.querySelector("#hiddenId").value = "";
         $form.reset();
       });
 
       d.addEventListener("click", (e) => {
-        if (e.target.className === "edit") {
+        if (e.target.matches(".edit")) {
           $title.textContent = "Editar entrada";
           $form.querySelector("#hidden").value = "editar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          $form.querySelector('input[name="nombre"]').value = rowName;
+
+          $form.querySelector('input[name="constelacion"]').value =
+            rowConstellation;
+          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
+        }
+
+        if (e.target.matches(".delete")) {
+          $title.textContent = "Eliminar entrada";
+          $form.querySelector("#hidden").value = "eliminar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          $form.querySelector('input[name="nombre"]').value = rowName;
+
+          $form.querySelector('input[name="constelacion"]').value =
+            rowConstellation;
+
+          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
         }
       });
 
