@@ -55,6 +55,41 @@
         $title = d.querySelector(".crud-title"),
         $template = d.querySelector("#crud-template").content,
         $fragment = d.createDocumentFragment();
+        
+        async function getAllData(){
+          
+          try{
+          const res = await fetch("http://localhost:3000/santos", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              'Accept': "application/json"
+            }
+          })
+          
+          if (!res.ok) throw {status: res.status, statusText: res.statusText}
+          
+          const json = res.json()
+          
+          json.forEach((el) => {
+              $template.querySelector(".name").textContent = el.nombre;
+              $template.querySelector(".constellation").textContent =
+                el.constelacion;
+              $template.querySelector("tr").setAttribute("id", el.id);
+              let $clone = document.importNode($template, true);
+              $fragment.appendChild($clone);
+            });
+            $table.appendChild($fragment)
+          
+        }catch(error){
+          let message = error.statusText || "Ocurrió un error"
+          alert(`Error ${error.status}: ${message}`)
+          
+        }
+        
+        }
+        getAllData()
+        
     </script>
   </body>
 </html>
