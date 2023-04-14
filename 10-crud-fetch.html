@@ -56,30 +56,21 @@
         $template = d.querySelector("#crud-template").content,
         $fragment = d.createDocumentFragment();
         
-        async function getAllData(){
+        async function ajaxFetch(url, options){
+          let {method, success, data} = options;
           
           try{
-          const res = await fetch("http://localhost:3000/santos", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-              'Accept': "application/json"
-            }
-          })
+          const res = await fetch(url, {
+            method: method,
+            body: data
+          });
           
           if (!res.ok) throw {status: res.status, statusText: res.statusText}
           
-          const json = await res.json()
+          let json = await res.json()
           
-          json.forEach((el) => {
-              $template.querySelector(".name").textContent = el.nombre;
-              $template.querySelector(".constellation").textContent =
-                el.constelacion;
-              $template.querySelector("tr").setAttribute("id", el.id);
-              let $clone = document.importNode($template, true);
-              $fragment.appendChild($clone);
-            });
-            $table.appendChild($fragment)
+         console.log(json)
+          success(json)
           
         }catch(error){
           let message = error.statusText || "Ocurrió un error"
@@ -88,8 +79,110 @@
         }
         
         }
-        getAllData()
         
+        const success = (json) => {
+
+            json.forEach((el) => {
+              $template.querySelector(".name").textContent = el.nombre;
+              $template.querySelector(".constellation").textContent =
+                el.constelacion;
+              $template.querySelector("tr").setAttribute("id", el.id);
+              let $clone = document.importNode($template, true);
+              $fragment.appendChild($clone);
+            });
+          $table.appendChild($fragment);
+        
+      }
+        
+        $form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const nombre = formData.get("nombre"),
+          constelacion = formData.get("constelacion"),
+          accion = formData.get("accion"),
+          dataid = formData.get("id");
+
+        const jsonData = {
+          id: dataid,
+          nombre: nombre,
+          constelacion: constelacion,
+        };
+        
+
+        switch (accion) {
+          case "agregar":
+            ajaxFetch("http://localhost:3000/santos", {
+              method: 'POST',
+              success: () => location.reload(),
+              data: jsonData
+            });
+            break;
+          case "editar":
+            ajaxFetch("http://localhost:3000/santos/" + jsonData.id, {
+              method: "PUT",
+              success: () => location.reload(),
+              data: jsonData
+            });
+            break;
+          default:
+            break;
+        }
+        $title.textContent = "Agregar entrada";
+        $form.querySelector("#hidden").value = "agregar";
+        $form.querySelector("#hiddenId").value = "";
+        $form.reset();
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target.matches(".edit")) {
+          $title.textContent = "Editar entrada";
+          $form.querySelector("#hidden").value = "editar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          $form.querySelector('input[name="nombre"]').value = rowName;
+          $form.querySelector('input[name="constelacion"]').value =
+            rowConstellation;
+          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
+        }
+
+        if (e.target.matches(".delete")) {
+          $form.querySelector("#hidden").value = "eliminar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          let isDelete = confirm(
+            `Estás seguro de eliminar la entrada con id:${
+              e.target.closest("tr").id
+            }?
+Nombre: ${rowName}; Constelación: ${rowConstellation};`
+          );
+
+          if (isDelete) {
+            ajaxFetch("http://localhost:3000/santos/" + e.target.closest("tr").id, {
+              method: "DELETE",
+              success: () => location.reload()
+            });
+          }
+        }
+      });
+
+      d.addEventListener("DOMContentLoaded", (e) => {
+        ajaxFetch("http://localhost:3000/santos", {
+          method: 'GET',
+          success: success
+        });
+      });
     </script>
   </body>
 </html>
