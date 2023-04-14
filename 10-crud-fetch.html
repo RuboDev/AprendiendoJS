@@ -69,7 +69,7 @@
           
           if (!res.ok) throw {status: res.status, statusText: res.statusText}
           
-          const json = res.json()
+          const json = await res.json()
           
           json.forEach((el) => {
               $template.querySelector(".name").textContent = el.nombre;
