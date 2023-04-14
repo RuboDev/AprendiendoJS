@@ -58,18 +58,21 @@
         
         async function ajaxFetch(url, options){
           let {method, success, data} = options;
-          
+          console.log(data)
           try{
           const res = await fetch(url, {
             method: method,
-            body: data
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
           });
           
           if (!res.ok) throw {status: res.status, statusText: res.statusText}
           
           let json = await res.json()
           
-         console.log(json)
+         
           success(json)
           
         }catch(error){
@@ -105,7 +108,7 @@
         const jsonData = {
           id: dataid,
           nombre: nombre,
-          constelacion: constelacion,
+          constelacion: constelacion
         };
         
 
@@ -113,7 +116,7 @@
           case "agregar":
             ajaxFetch("http://localhost:3000/santos", {
               method: 'POST',
-              success: () => location.reload(),
+              success: (json) => location.reload(),
               data: jsonData
             });
             break;
