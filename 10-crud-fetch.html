@@ -58,7 +58,6 @@
         
         async function ajaxFetch(url, options){
           let {method, success, data} = options;
-          console.log(data)
           try{
           const res = await fetch(url, {
             method: method,
@@ -84,8 +83,10 @@
         }
         
         const success = (json) => {
+          let jsonArray = json;
 
-            json.forEach((el) => {
+          try {
+            jsonArray.forEach((el) => {
               $template.querySelector(".name").textContent = el.nombre;
               $template.querySelector(".constellation").textContent =
                 el.constelacion;
@@ -93,9 +94,11 @@
               let $clone = document.importNode($template, true);
               $fragment.appendChild($clone);
             });
+          } catch (error) {
+            console.log(error);
+          }
           $table.appendChild($fragment);
-        
-      }
+        }
         
         $form.addEventListener("submit", (e) => {
         e.preventDefault();
