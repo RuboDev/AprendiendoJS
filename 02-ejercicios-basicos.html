@@ -17,28 +17,88 @@
 
       /* 2) Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFunción("Hola Mundo", 4) devolverá "Hola" */
 
+      const textoHastaCaracterIndicado = (texto, caracterIndicado) =>
+        console.log(texto.slice(0, caracterIndicado));
+      textoHastaCaracterIndicado("Hola Mundo", 6);
+
       /* 3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe.
-     miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'] */
-
+      miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'] */
+      const stringToArrayOfStrings = (string, separador) =>
+        console.log(string.split(separador));
+      stringToArrayOfStrings("Hola-que-tal", "-");
       /* 4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo */
-
+      const repiteTexto = (texto, veces) => console.log(texto.repeat(veces));
+      repiteTexto("Hola Mundo ", 3);
       /* 5) Programa una función que invierta las palabras de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá "odnuM aloH" */
+      const invierteString = (string) =>
+        console.log(string.split("").reverse().join(""));
+      invierteString("Cocacola");
 
       /* 6) Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe. miFuncion("hola mundo adios mundo", "mundo") devolverá 2 */
+      const countStringOnString = (string, stringAbuscar) =>
+        console.log(string.split(stringAbuscar).length - 1);
+      countStringOnString("mundo hola mundo adios mundo mundo", "mundo");
 
       /* 7) Programa una función que valide si una palabra o frase dada, es un palíndromo (que se lee igual en un sentido que en otro), pe. mifuncion("Salas") devolverá true */
+      const esPalindromo = (texto) =>
+        console.log(
+          texto
+            .toUpperCase()
+            .split("")
+            .reverse()
+            .join("")
+            .split(" ")
+            .join("") === texto.toUpperCase().split(" ").join("")
+        );
+      esPalindromo("Dabale arroz a la zorra el abad");
 
       /* 8) Programa una función que elimine cierto patrón de caracteres de un texto dado, pe. miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5 */
+      const eliminaPatronDeTexto = (texto, patron) =>
+        console.log(texto.replaceAll(patron, ""));
+      eliminaPatronDeTexto("hola1 hola2 hola3 hola4", "hola");
 
       /* 9) Programa una función que obtenga un numero aleatorio entre 501 y 600 */
+      const randomNum500_600 = () =>
+        console.log(Math.round(Math.random() * (600 - 501) + 501));
+      randomNum500_600();
 
       /* 10) Programa una función que reciba un número y evalúe si es capicúa o no (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true  */
-
+      const esCapicua = (numero) =>
+        console.log(
+          parseInt(numero.toString().split("").reverse().join("")) === numero
+        );
+      esCapicua(5544455);
       /* 11) Programa una función que calcule el factorial de un número (El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120 */
+      const factorial = (numero) => {
+        if (numero === 1) {
+          return 1;
+        }
+        return numero * factorial(numero - 1);
+      };
+      console.log(factorial(3));
 
       /* 12) Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true */
+      const esPrimo = (numero) => {
+        if (numero === 0 || numero === 1) return false;
+        for (let i = 2; i < numero; i++) {
+          if (numero % i === 0) {
+            console.log(
+              `${i} es divisor de ${numero}; ${numero}/${i}=${numero / i}`
+            );
+            return false;
+          }
+        }
+        return true;
+      };
+      console.log(esPrimo(73));
 
       /* 13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar */
+      const esParOImpar = (numero) =>
+        numero % 2 === 0
+          ? console.log(`${numero} es par`)
+          : console.log(`${numero} es impar`);
+
+      esParOImpar(5);
 
       /* 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F */
 
@@ -67,21 +127,21 @@
       /* 26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5 */
 
       /* 27) Programa una clase llamada Pelicula.
-        La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
-          - Todos los datos del objeto son obligatorios.
-          - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
-          - Valida que el título no rebase los 100 caracteres.
-          - Valida que el director no rebase los 50 caracteres.
-          - Valida que el año de estreno sea un número entero de 4 dígitos.
-          - Valida que el país o paises sea introducidos en forma de arreglo.
-          - Valida que los géneros sean introducidos en forma de arreglo.
-          - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
-          - Crea un método estático que devuelva los géneros aceptados*.
-          - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
-          - Crea un método que devuelva toda la ficha técnica de la película.
-          - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
-        * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
-        */
+         La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+           - Todos los datos del objeto son obligatorios.
+           - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
+           - Valida que el título no rebase los 100 caracteres.
+           - Valida que el director no rebase los 50 caracteres.
+           - Valida que el año de estreno sea un número entero de 4 dígitos.
+           - Valida que el país o paises sea introducidos en forma de arreglo.
+           - Valida que los géneros sean introducidos en forma de arreglo.
+           - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
+           - Crea un método estático que devuelva los géneros aceptados*.
+           - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
+           - Crea un método que devuelva toda la ficha técnica de la película.
+           - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
+         * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+         */
     </script>
   </body>
 </html>
