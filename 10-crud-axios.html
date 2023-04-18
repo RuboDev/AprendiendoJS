@@ -48,6 +48,7 @@
         </td>
       </tr>
     </template>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script>
       const d = document,
         $table = d.querySelector(".crud-table tbody"),
@@ -55,6 +56,132 @@
         $title = d.querySelector(".crud-title"),
         $template = d.querySelector("#crud-template").content,
         $fragment = d.createDocumentFragment();
+
+      function ajaxMakeRequest(config) {
+        let { method, url, data, success } = config;
+        console.log(method, url, data, success);
+
+        axios({
+          method: method,
+          url: url,
+          data: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            success(res.data);
+          })
+          .catch((err) => {
+            let message = err.statusText || "Ocurrió un error";
+            alert(`Error ${err.status}: ${message}`);
+          });
+      }
+
+      const success = (json) => {
+        json.forEach((el) => {
+          $template.querySelector(".name").textContent = el.nombre;
+          $template.querySelector(".constellation").textContent =
+            el.constelacion;
+          $template.querySelector("tr").setAttribute("id", el.id);
+          let $clone = document.importNode($template, true);
+          $fragment.appendChild($clone);
+        });
+
+        $table.appendChild($fragment);
+      };
+
+      $form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const nombre = formData.get("nombre"),
+          constelacion = formData.get("constelacion"),
+          accion = formData.get("accion"),
+          dataid = formData.get("id");
+
+        const jsonData = {
+          id: dataid,
+          nombre: nombre,
+          constelacion: constelacion,
+        };
+
+        switch (accion) {
+          case "agregar":
+            ajaxMakeRequest({
+              method: "POST",
+              url: "http://localhost:3000/santos",
+              data: jsonData,
+              success: () => location.reload(),
+            });
+            break;
+          case "editar":
+            ajaxMakeRequest({
+              method: "PUT",
+              url: "http://localhost:3000/santos/" + jsonData.id,
+              data: jsonData,
+              success: () => location.reload(),
+            });
+            break;
+          default:
+            break;
+        }
+        $title.textContent = "Agregar entrada";
+        $form.querySelector("#hidden").value = "agregar";
+        $form.querySelector("#hiddenId").value = "";
+        $form.reset();
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target.matches(".edit")) {
+          $title.textContent = "Editar entrada";
+          $form.querySelector("#hidden").value = "editar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          $form.querySelector('input[name="nombre"]').value = rowName;
+          $form.querySelector('input[name="constelacion"]').value =
+            rowConstellation;
+          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
+        }
+
+        if (e.target.matches(".delete")) {
+          $form.querySelector("#hidden").value = "eliminar";
+
+          const rowName = e.target
+              .closest("tr")
+              .querySelector(".name").textContent,
+            rowConstellation = e.target
+              .closest("tr")
+              .querySelector(".constellation").textContent;
+
+          let isDelete = confirm(
+            `Estás seguro de eliminar la entrada con id:${
+              e.target.closest("tr").id
+            }? Nombre: ${rowName}; Constelación: ${rowConstellation};`
+          );
+
+          if (isDelete) {
+            ajaxMakeRequest({
+              method: "DELETE",
+              url: "http://localhost:3000/santos/" + e.target.closest("tr").id,
+              success: () => location.reload(),
+            });
+          }
+        }
+      });
+
+      d.addEventListener("DOMContentLoaded", (e) => {
+        ajaxMakeRequest({
+          method: "GET",
+          url: "http://localhost:3000/santos",
+          success: success,
+        });
+      });
     </script>
   </body>
 </html>
