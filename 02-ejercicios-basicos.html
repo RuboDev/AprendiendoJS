@@ -101,8 +101,37 @@
       esParOImpar(5);
 
       /* 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F */
+      const convertirCelsiusFahrenheit = (grados, tipoMedidaIntroducida) => {
+        if (tipoMedidaIntroducida === "C") {
+          return `${(grados * 9) / 5 + 32}ºF`;
+        }
+        if (tipoMedidaIntroducida === "F") {
+          return `${((grados - 32) * 5) / 9}ºC`;
+        }
+        return "Imposible convertir, unidad de medida desconocida";
+      };
+      console.log(convertirCelsiusFahrenheit(90, "F"));
+      console.log(convertirCelsiusFahrenheit(0, "C"));
 
       /* 15) Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10 */
+      const conversorDecimalBinario = (numero, base) => {
+        let result = [];
+        if (base === 10) {
+          while (numero / 2 >= 0) {
+            // 10
+            result.push((numero % 2).toString());
+            numero = Math.trunc(numero / 2);
+            if (numero < 1) {
+              break;
+            }
+          }
+          if (base === 2) {
+          }
+          return result.reverse().join("");
+        }
+      };
+
+      console.log(conversorDecimalBinario(8, 10));
 
       /* 16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800 */
 
