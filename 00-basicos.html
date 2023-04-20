@@ -609,30 +609,30 @@
       /* const saludar = () => console.log("Hola");
       saludar(); */
 
-      const saludar = (nombre) => console.log(`Hola ${nombre}`); // return implícito
-      saludar("Juanito");
+      const saludar = (nombre) => console.log(`Hola ${nombre}`) // return implícito
+      saludar('Juanito')
 
       /* const sumar = function (a, b) {
         return a + b; // return explícito
       }; */
 
-      const sumar = (a, b) => a + b;
+      const sumar = (a, b) => a + b
 
-      console.log(sumar(9, 9));
+      console.log(sumar(9, 9))
 
       const funcionDeVariasLineas = () => {
-        console.log("Uno");
-        console.log("Dos");
-        console.log("Tres");
-      };
+        console.log('Uno')
+        console.log('Dos')
+        console.log('Tres')
+      }
 
-      funcionDeVariasLineas();
+      funcionDeVariasLineas()
 
-      const numeros = [1, 2, 3, 4, 5];
+      const numeros = [1, 2, 3, 4, 5]
 
       numeros.forEach((el, index) => {
-        console.log(`El elemento ${el} esta en la posición ${index}`);
-      });
+        console.log(`El elemento ${el} esta en la posición ${index}`)
+      })
 
       /* function perro() {
         console.log(this);
@@ -641,12 +641,12 @@
       perro(); */
 
       const perro = {
-        nombre: "kenai",
+        nombre: 'kenai',
         ladrar: function () {
-          console.log(this);
+          console.log(this)
         },
-      };
-      perro.ladrar();
+      }
+      perro.ladrar()
     </script>
   </body>
 </html>

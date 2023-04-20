@@ -50,156 +50,156 @@
     </template>
     <script>
       const d = document,
-        $table = d.querySelector(".crud-table tbody"),
-        $form = d.querySelector(".crud-form"),
-        $title = d.querySelector(".crud-title"),
-        $template = d.querySelector("#crud-template").content,
-        $fragment = d.createDocumentFragment();
+        $table = d.querySelector('.crud-table tbody'),
+        $form = d.querySelector('.crud-form'),
+        $title = d.querySelector('.crud-title'),
+        $template = d.querySelector('#crud-template').content,
+        $fragment = d.createDocumentFragment()
 
       const ajax = (options) => {
-        let { url, method, success, error, data } = options;
-        const xhr = new XMLHttpRequest();
+        let { url, method, success, error, data } = options
+        const xhr = new XMLHttpRequest()
 
-        xhr.addEventListener("readystatechange", (e) => {
-          if (xhr.readyState !== 4) return;
+        xhr.addEventListener('readystatechange', (e) => {
+          if (xhr.readyState !== 4) return
           if (xhr.status >= 200 && xhr.status < 300) {
-            let json = JSON.parse(xhr.responseText);
-            success(json);
+            let json = JSON.parse(xhr.responseText)
+            success(json)
           } else {
-            let message = xhr.statusText || "Ocurrió un error";
-            error(`Error ${xhr.status}: ${message}`);
+            let message = xhr.statusText || 'Ocurrió un error'
+            error(`Error ${xhr.status}: ${message}`)
           }
-        });
+        })
 
-        xhr.open(method || "GET", url);
-        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr.send(JSON.stringify(data));
-      };
+        xhr.open(method || 'GET', url)
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+        xhr.send(JSON.stringify(data))
+      }
 
       const success = (json) => {
-        let jsonArray = json;
-        if (JSON.stringify(json).charAt(0) === "{") {
-          jsonArray = [json];
+        let jsonArray = json
+        if (JSON.stringify(json).charAt(0) === '{') {
+          jsonArray = [json]
         }
 
         if (Object.entries(json).length !== 0) {
           try {
             jsonArray.forEach((el) => {
-              $template.querySelector(".name").textContent = el.nombre;
-              $template.querySelector(".constellation").textContent =
-                el.constelacion;
-              $template.querySelector("tr").setAttribute("id", el.id);
-              let $clone = document.importNode($template, true);
-              $fragment.appendChild($clone);
-            });
+              $template.querySelector('.name').textContent = el.nombre
+              $template.querySelector('.constellation').textContent =
+                el.constelacion
+              $template.querySelector('tr').setAttribute('id', el.id)
+              let $clone = document.importNode($template, true)
+              $fragment.appendChild($clone)
+            })
           } catch (error) {
-            console.log(error);
+            console.log(error)
           }
-          $table.appendChild($fragment);
+          $table.appendChild($fragment)
         }
-      };
+      }
 
       const errorFunc = (error) => {
-        alert(error);
-      };
+        alert(error)
+      }
 
-      $form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const nombre = formData.get("nombre"),
-          constelacion = formData.get("constelacion"),
-          accion = formData.get("accion"),
-          dataid = formData.get("id");
+      $form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const nombre = formData.get('nombre'),
+          constelacion = formData.get('constelacion'),
+          accion = formData.get('accion'),
+          dataid = formData.get('id')
 
         const jsonData = {
           id: dataid,
           nombre: nombre,
           constelacion: constelacion,
-        };
+        }
 
         switch (accion) {
-          case "agregar":
+          case 'agregar':
             ajax({
-              url: "http://localhost:3000/santos",
-              method: "POST",
+              url: 'http://localhost:3000/santos',
+              method: 'POST',
               success: success,
               error: errorFunc,
               data: jsonData,
-            });
-            break;
-          case "editar":
+            })
+            break
+          case 'editar':
             ajax({
-              url: "http://localhost:3000/santos/" + jsonData.id,
-              method: "PUT",
+              url: 'http://localhost:3000/santos/' + jsonData.id,
+              method: 'PUT',
               success: () => location.reload(),
               error: errorFunc,
               data: jsonData,
-            });
-            break;
+            })
+            break
           default:
-            break;
+            break
         }
-        $title.textContent = "Agregar entrada";
-        $form.querySelector("#hidden").value = "agregar";
-        $form.querySelector("#hiddenId").value = "";
-        $form.reset();
-      });
+        $title.textContent = 'Agregar entrada'
+        $form.querySelector('#hidden').value = 'agregar'
+        $form.querySelector('#hiddenId').value = ''
+        $form.reset()
+      })
 
-      d.addEventListener("click", (e) => {
-        if (e.target.matches(".edit")) {
-          $title.textContent = "Editar entrada";
-          $form.querySelector("#hidden").value = "editar";
+      d.addEventListener('click', (e) => {
+        if (e.target.matches('.edit')) {
+          $title.textContent = 'Editar entrada'
+          $form.querySelector('#hidden').value = 'editar'
 
           const rowName = e.target
-              .closest("tr")
-              .querySelector(".name").textContent,
+              .closest('tr')
+              .querySelector('.name').textContent,
             rowConstellation = e.target
-              .closest("tr")
-              .querySelector(".constellation").textContent;
+              .closest('tr')
+              .querySelector('.constellation').textContent
 
-          $form.querySelector('input[name="nombre"]').value = rowName;
+          $form.querySelector('input[name="nombre"]').value = rowName
           $form.querySelector('input[name="constelacion"]').value =
-            rowConstellation;
-          $form.querySelector("#hiddenId").value = e.target.closest("tr").id;
+            rowConstellation
+          $form.querySelector('#hiddenId').value = e.target.closest('tr').id
         }
 
-        if (e.target.matches(".delete")) {
-          $form.querySelector("#hidden").value = "eliminar";
+        if (e.target.matches('.delete')) {
+          $form.querySelector('#hidden').value = 'eliminar'
 
           const rowName = e.target
-              .closest("tr")
-              .querySelector(".name").textContent,
+              .closest('tr')
+              .querySelector('.name').textContent,
             rowConstellation = e.target
-              .closest("tr")
-              .querySelector(".constellation").textContent;
+              .closest('tr')
+              .querySelector('.constellation').textContent
 
           let isDelete = confirm(
             `Estás seguro de eliminar la entrada con id:${
-              e.target.closest("tr").id
+              e.target.closest('tr').id
             }?
 Nombre: ${rowName}; Constelación: ${rowConstellation};`
-          );
+          )
 
           if (isDelete) {
             ajax({
-              url: "http://localhost:3000/santos/" + e.target.closest("tr").id,
-              method: "DELETE",
+              url: 'http://localhost:3000/santos/' + e.target.closest('tr').id,
+              method: 'DELETE',
               success: () => location.reload(),
               error: errorFunc,
-            });
+            })
           }
         }
-      });
+      })
 
-      d.addEventListener("DOMContentLoaded", (e) => {
+      d.addEventListener('DOMContentLoaded', (e) => {
         ajax({
-          url: "http://localhost:3000/santos",
-          method: "GET",
+          url: 'http://localhost:3000/santos',
+          method: 'GET',
           success: success,
           error: errorFunc,
           data: null,
-        });
-      });
+        })
+      })
     </script>
   </body>
 </html>

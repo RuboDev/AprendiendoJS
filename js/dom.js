@@ -9,7 +9,7 @@ let texto = "Hola, soy tu amigo y docente digital... Jonathan MirCha";
 const hablar = (texto) => speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
 hablar(texto); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 61. DOM: Introducción - #jonmircha     ********** */
 /* console.log("********** Elementos del Documento **********");
 console.log(window.document);
@@ -30,9 +30,9 @@ setTimeout(() => {
 }, 2000);
 document.write("<h2>Hola Mundo desde el DOM</h2>"); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 62. DOM: Nodos, Elementos y Selectores - #jonmircha     ********** */
-//https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+// https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
 /* console.log(document.getElementsByTagName("li"));
 console.log(document.getElementsByClassName("card"));
 console.log(document.getElementsByName("nombre"));
@@ -48,7 +48,7 @@ console.log(document.querySelectorAll(".card")[2]);
 console.log(document.querySelector("#menu li"));
 console.log(document.querySelectorAll("#menu li")); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 63. DOM: Atributos y Data-Attributes - #jonmircha     ********** */
 /* console.log(document.documentElement.lang);
 console.log(document.documentElement.getAttribute("lang"));
@@ -77,7 +77,7 @@ console.log($linkDOM.hasAttribute("data-id"));
 $linkDOM.removeAttribute("data-id");
 console.log($linkDOM.hasAttribute("data-id")); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 64. DOM: Estilos y Variables CSS - #jonmircha     ********** */
 /* const $linkDOM = document.querySelector(".link-dom");
 console.log($linkDOM.style);
@@ -109,7 +109,7 @@ $html.style.setProperty("--dark-color", "#000");
 varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
 $body.style.setProperty("background-color", varDarkColor); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 65. DOM: Clases CSS - #jonmircha     ********** */
 /* const $card = document.querySelector(".card");
 console.log($card);
@@ -132,7 +132,7 @@ $card.classList.add("opacity-80", "sepia");
 $card.classList.remove("opacity-80", "sepia");
 $card.classList.toggle("opacity-80", "sepia"); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 66. DOM: Texto y HTML - #jonmircha     ********** */
 /* const $whatIsDOM = document.getElementById("que-es");
 let text = `
@@ -151,7 +151,7 @@ $whatIsDOM.textContent = text;
 $whatIsDOM.innerHTML = text;
 $whatIsDOM.outerHTML = text; */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 67. DOM Traversing: Recorriendo el DOM - #jonmircha     ********** */
 /* const $cards = document.querySelector(".cards");
 console.log($cards);
@@ -227,7 +227,7 @@ document.write("<h3>Meses del Año</h3>");
 $ul3.appendChild($fragment);
 document.body.appendChild($ul3); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 69. DOM: Templates HTML - #jonmircha     ********** */
 /* const $cards = document.querySelector(".cards"),
   $template = document.getElementById("template-card").content,
@@ -263,7 +263,7 @@ cardsContent.forEach((el) => {
 });
 $cards.appendChild($fragment); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 70. DOM: Modificando Elementos (Old Style) - #jonmircha     ********** */
 /* const $cards = document.querySelector(".cards"),
   $newCard = document.createElement("figure"),
@@ -278,7 +278,7 @@ $newCard.classList.add("card");
 $cards.insertBefore($newCard, $cards.firstElementChild);
 document.body.appendChild($cloneCards); */
 /*
-*/
+ */
 /* **********     Curso JavaScript: 71. DOM: Modificando Elementos (Cool Style) - #jonmircha     ********** */
 /*
 .insertAdjacent...
@@ -301,15 +301,14 @@ $newCard.classList.add("card");
 $newCard.insertAdjacentHTML("afterbegin", $contenCard);
 $cards.insertAdjacentElement("beforeend", $newCard);
 $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
-//$cards.prepend($newCard);
-//$cards.append($newCard);
-//$cards.before($newCard);
-//$cards.after($newCard);
-
+// $cards.prepend($newCard);
+// $cards.append($newCard);
+// $cards.before($newCard);
+// $cards.after($newCard);
 
 // /* Tipos de Eventos */
 
-// /* esta funcion es invocada por un evento de 
+// /* esta funcion es invocada por un evento de
 // atributo html: onclick */
 // function holaMundo() {
 //   alert("Hola Mundo");
@@ -319,7 +318,7 @@ $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
 // /* Evento semantico -> asignando la funcion a ejecutar en la
 //   propiedad onclick del elemento sin () para que no ejecute al cargar.
 //   Esta forma de manejar eventos tiene la limitación de que a
-//   la propiedad del evento solo se le puede asignar una funcion. 
+//   la propiedad del evento solo se le puede asignar una funcion.
 //   Ej.: onclick -ver abajo- solo puede almacenar una función.
 // */
 // const $eventoSemantico = document.getElementById("evento-semantico");
@@ -357,14 +356,14 @@ $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
 // const $eventoRemover = document.getElementById("evento-remover");
 
 // /*Para eliminar un Manejador de eventos la funcion que maneja el
-// evento tiene que tener un identificador, no se pueden usar 
+// evento tiene que tener un identificador, no se pueden usar
 // funciones anonimas ni arrow functions*/
 // const removerDobleClick = (e) => {
 //   alert(`Removiendo el evento de tipo ${e.type}`);
 //   console.log(e);
 //   $eventoRemover.removeEventListener("dblclick", removerDobleClick);
 
-//   /*Como estamos removiendo el propio manejador que remueve solo 
+//   /*Como estamos removiendo el propio manejador que remueve solo
 //   lo podremos hacer una vez, para hacerlo más notorio deshabilitamos
 //   el boton al hacerlo.*/
 //   $eventoRemover.disabled = true;
@@ -372,14 +371,15 @@ $newCard.querySelector("figcaption").insertAdjacentText("afterbegin", "Any"); */
 
 // $eventoRemover.addEventListener("dblclick", removerDobleClick);
 
-
 // // FLUJO DE EVENTOS - Como se propagan los eventos
 // const $divsEventos = document.querySelectorAll(".eventos-flujo div");
 // console.log($divsEventos);
 
 function flujoEventos(e) {
-  console.log(`Hola te saluda ${this}, el click lo originó ${e.target.className}`);
-  e.stopPropagation(); // stopPropagation() - como su nombre indica, para la propagación del evento
+  console.log(
+    `Hola te saluda ${this}, el click lo originó ${e.target.className}`
+  )
+  e.stopPropagation() // stopPropagation() - como su nombre indica, para la propagación del evento
 }
 
 // $divsEventos.forEach(div => {
@@ -404,20 +404,20 @@ function flujoEventos(e) {
 //   e.stopPropagation();
 // });
 
-document.addEventListener("click", (e) => {
-  console.log(e.target);
+document.addEventListener('click', (e) => {
+  console.log(e.target)
 
-  if(e.target.matches(".eventos-flujo div")){
-    flujoEventos(e);
+  if (e.target.matches('.eventos-flujo div')) {
+    flujoEventos(e)
   }
 
-  if(e.target.matches(".eventos-flujo a")){
-    alert("Hola, movidas into historias")
-    e.preventDefault();
+  if (e.target.matches('.eventos-flujo a')) {
+    alert('Hola, movidas into historias')
+    e.preventDefault()
   }
-});
+})
 
-/* MANEJO DEL BOM - Algunos eventos*/
+/* MANEJO DEL BOM - Algunos eventos */
 /* window.addEventListener("resize", (e) => {
   console.clear();
   console.log("********Evento Resize********");
@@ -437,7 +437,7 @@ window.addEventListener("scroll", (e) => {
 });
 
 window.addEventListener("load", (e) => {
-  
+
   console.log("********Evento LOAD********");
   console.log(window.screenX);
   console.log(window.screenY);
@@ -445,7 +445,7 @@ window.addEventListener("load", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", (e) => {
-  
+
   console.log("********Evento DOMContentLoaded********");
   console.log(window.screenX);
   console.log(window.screenY);
@@ -453,57 +453,57 @@ document.addEventListener("DOMContentLoaded", (e) => {
 }) */
 
 /* BOM: Métodos de window */
-const $btnAbrir = document.getElementById("abrir-ventana"),
-$btnCerrar = document.getElementById("cerrar-ventana"),
-$btnImprimir = document.getElementById("imprimir-ventana");
+const $btnAbrir = document.getElementById('abrir-ventana')
+const $btnCerrar = document.getElementById('cerrar-ventana')
+const $btnImprimir = document.getElementById('imprimir-ventana')
 
-let ventana;
+let ventana
 // método open() de window
-$btnAbrir.addEventListener("click", (e) => {
-  ventana = window.open("https://jonmircha.com");
-});
+$btnAbrir.addEventListener('click', (e) => {
+  ventana = window.open('https://jonmircha.com')
+})
 // método close() de window
-$btnCerrar.addEventListener("click", (e) => {
-  //window.close();
-  ventana.close();
-});
+$btnCerrar.addEventListener('click', (e) => {
+  // window.close();
+  ventana.close()
+})
 
-$btnImprimir.addEventListener("click", (e) => {
-  window.print();
-});
+$btnImprimir.addEventListener('click', (e) => {
+  window.print()
+})
 
 /* BOM: Objetos de window */
 
 /* Objeto URL */
-console.log("******Objeto URL(location)******");
-console.log(location); //window.location
-console.log(location.origin);
-console.log(location.protocol);
-console.log(location.host);
-console.log(location.hostname);
-console.log(location.port);
-console.log(location.href);
-console.log(location.hash);
-console.log(location.search);
-console.log(location.pathname);
-//location.reload();
+console.log('******Objeto URL(location)******')
+console.log(location) // window.location
+console.log(location.origin)
+console.log(location.protocol)
+console.log(location.host)
+console.log(location.hostname)
+console.log(location.port)
+console.log(location.href)
+console.log(location.hash)
+console.log(location.search)
+console.log(location.pathname)
+// location.reload();
 
 /* Objeto History */
-console.log("******Objeto Historial(history)******");
-console.log(history); // window.history
+console.log('******Objeto Historial(history)******')
+console.log(history) // window.history
 // history.length -> cuantas páginas hemos visitado en esa pestaña.
-//history.back(1); // página anterior
-//history.forward(1); // página siguiente
-//history.go(-1); numeros positivos para siguiente, negativos para anterior
+// history.back(1); // página anterior
+// history.forward(1); // página siguiente
+// history.go(-1); numeros positivos para siguiente, negativos para anterior
 
 /* Objeto Navigator */
-console.log(navigator);
-console.log(navigator.connection);
-console.log(navigator.geolocation);
-console.log(navigator.mediaDevices);
-console.log(navigator.mimeTypes);
-console.log(navigator.onLine);
-console.log(navigator.serviceWorker);
-console.log(navigator.storage);
-console.log(navigator.usb);
-console.log(navigator.userAgent);
+console.log(navigator)
+console.log(navigator.connection)
+console.log(navigator.geolocation)
+console.log(navigator.mediaDevices)
+console.log(navigator.mimeTypes)
+console.log(navigator.onLine)
+console.log(navigator.serviceWorker)
+console.log(navigator.storage)
+console.log(navigator.usb)
+console.log(navigator.userAgent)

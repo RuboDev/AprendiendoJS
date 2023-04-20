@@ -59,54 +59,54 @@
       // prototipo, no a la función como tal.
       function Animal(nombre, genero) {
         //Atributos
-        this.nombre = nombre;
-        this.genero = genero;
+        this.nombre = nombre
+        this.genero = genero
       }
 
       // Métodos agregados al prototipo
       Animal.prototype.sonar = function () {
-        console.log("Hago sonidos porque estoy vivo");
-      };
+        console.log('Hago sonidos porque estoy vivo')
+      }
 
       Animal.prototype.saludar = function () {
-        console.log(`Hola me llamo ${this.nombre}`);
-      };
+        console.log(`Hola me llamo ${this.nombre}`)
+      }
 
-      const snoopy = new Animal("Snoopy", "Macho"),
-        lolabunny = new Animal("Lola Bunny", "Hembra");
-      console.log(snoopy, lolabunny);
+      const snoopy = new Animal('Snoopy', 'Macho'),
+        lolabunny = new Animal('Lola Bunny', 'Hembra')
+      console.log(snoopy, lolabunny)
 
-      snoopy.sonar();
-      snoopy.saludar();
-      lolabunny.sonar();
-      lolabunny.saludar();
+      snoopy.sonar()
+      snoopy.saludar()
+      lolabunny.sonar()
+      lolabunny.saludar()
 
-      const obj1 = { a: 1, b: 2 };
-      console.log(obj1);
-      const obj2 = Object.create(obj1);
-      console.log(obj2);
+      const obj1 = { a: 1, b: 2 }
+      console.log(obj1)
+      const obj2 = Object.create(obj1)
+      console.log(obj2)
 
       /* Documentandome acerca de Herencia y prototype - */
 
       /* Clases y herencia*/
       class Persona {
         constructor(nombre) {
-          this.nombre = nombre;
+          this.nombre = nombre
           this.funcion = function () {
-            console.log("Esta funcion hace cosas");
-          };
+            console.log('Esta funcion hace cosas')
+          }
         }
       }
 
       class Profesion extends Persona {
         constructor(nombre) {
-          super(nombre);
-          this.antiguedad = 1;
+          super(nombre)
+          this.antiguedad = 1
         }
       }
 
-      const objProf = new Profesion("Miguel");
-      console.log(objProf);
+      const objProf = new Profesion('Miguel')
+      console.log(objProf)
 
       /* getters y setters se declaran con palabras reservadas: get ý set ,
       métodos estáticos con palabra static */

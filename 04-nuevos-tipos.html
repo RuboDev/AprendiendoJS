@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuevos Tipos de Datos en JavaScript</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuevos Tipos de Datos en JavaScript</title>
-</head>
-
-<body>
-  <h1>Nuevos Tipos de Datos en JavaScript</h1>
-  <script>
-    /* **********     Curso JavaScript: 49. Symbols - #jonmircha     ********** */
-    /* let id = Symbol("id");
+  <body>
+    <h1>Nuevos Tipos de Datos en JavaScript</h1>
+    <script>
+      /* **********     Curso JavaScript: 49. Symbols - #jonmircha     ********** */
+      /* let id = Symbol("id");
     let id2 = Symbol("id2");
 
     console.log(id === id2)
@@ -46,12 +45,8 @@
 
     console.log(Object.getOwnPropertySymbols(persona)); */
 
-
-
-
-
-    /* **********     Curso JavaScript: 50. Sets - #jonmircha     ********** */
-    /* const set = new Set([1, 2, 3, 3, 4, 5, true, false, false, {}, {}, "hola", "HOla"]);
+      /* **********     Curso JavaScript: 50. Sets - #jonmircha     ********** */
+      /* const set = new Set([1, 2, 3, 3, 4, 5, true, false, false, {}, {}, "hola", "HOla"]);
     console.log(set);
     console.log(set.size);
 
@@ -89,12 +84,8 @@
     set2.clear();
     console.log(set2); */
 
-
-
-
-
-    /* **********     Curso JavaScript: 51. Maps - #jonmircha     ********** */
-    /* const mapa = new Map();
+      /* **********     Curso JavaScript: 51. Maps - #jonmircha     ********** */
+      /* const mapa = new Map();
     mapa.set("nombre", "Jon");
     mapa.set("apellido", "MirCha");
     mapa.set("edad", 35);
@@ -132,12 +123,8 @@
     console.log(llavesMapa2);
     console.log(valoresMapa2); */
 
-
-
-
-
-    /* **********     Curso JavaScript: 52. WeakSets & WeakMaps - #jonmircha     ********** */
-    /* //const ws = new WeakSet([1, 2, 3, 3, 4, 5, true, false, false, {}, {}, "hola", "HOla"]);
+      /* **********     Curso JavaScript: 52. WeakSets & WeakMaps - #jonmircha     ********** */
+      /* //const ws = new WeakSet([1, 2, 3, 3, 4, 5, true, false, false, {}, {}, "hola", "HOla"]);
     const ws = new WeakSet();
 
     let valor1 = { "valor1": 1 };
@@ -167,14 +154,14 @@
       valor3 = null;
     }, 5000); */
 
-    /* const wm = new WeakMap([
+      /* const wm = new WeakMap([
       ["nombre", "kEnAi"],
       ["edad", 7],
       ["animal", "perro"],
       [null, "nulo"]
     ]); */
 
-    /* const wm = new WeakMap();
+      /* const wm = new WeakMap();
     let llave1 = {};
     let llave2 = {};
     let llave3 = {};
@@ -205,12 +192,8 @@
       llave3 = null;
     }, 5000); */
 
-
-
-
-
-    /* **********     Curso JavaScript: 53. Iterables & Iterators - #jonmircha     ********** */
-    /* const iterable = [1, 2, 3, 4, 5];
+      /* **********     Curso JavaScript: 53. Iterables & Iterators - #jonmircha     ********** */
+      /* const iterable = [1, 2, 3, 4, 5];
     //const iterable = "Hola Mundo";
     //const iterable = new Set([1, 2, 3, 3, 4, 5]);
     //const iterable = new Map([["nombre", "jon"], ["edad", 35]]);
@@ -234,12 +217,8 @@
       next = iterador.next();
     } */
 
-
-
-
-
-    /* **********     Curso JavaScript: 54. Generators - #jonmircha     ********** */
-    /* function* iterable() {
+      /* **********     Curso JavaScript: 54. Generators - #jonmircha     ********** */
+      /* function* iterable() {
       yield "hola";
       console.log("Hola consola");
       yield "hola 2";
@@ -285,12 +264,8 @@
       console.log(y);
     } */
 
-
-
-
-
-    /* **********     Curso JavaScript: 55. Proxies - #jonmircha     ********** */
-    /* const persona = {
+      /* **********     Curso JavaScript: 55. Proxies - #jonmircha     ********** */
+      /* const persona = {
       nombre: "",
       apellido: "",
       edad: 0
@@ -321,12 +296,8 @@
 
     console.log(persona); */
 
-
-
-
-
-    /* **********     Curso JavaScript: 56. Propiedades Dinámicas - #jonmircha     ********** */
-    /*     let aleatorio = Math.round(Math.random() * 100 + 5);
+      /* **********     Curso JavaScript: 56. Propiedades Dinámicas - #jonmircha     ********** */
+      /*     let aleatorio = Math.round(Math.random() * 100 + 5);
         const objUsuarios = {
           propiedad: "Valor",
           [`id_${aleatorio}`]: "Valor Aleatorio"
@@ -337,7 +308,6 @@
         usuarios.forEach((usuario, index) => objUsuarios[`id_${index}`] = usuario);
 
         console.log(objUsuarios); */
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
