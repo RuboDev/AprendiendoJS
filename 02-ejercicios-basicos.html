@@ -313,11 +313,11 @@
                        X- Valida que el director no rebase los 50 caracteres.
                        X- Valida que el año de estreno sea un número entero de 4 dígitos.
                        X- Valida que el país o paises sea introducidos en forma de arreglo.
-                        - Valida que los géneros sean introducidos en forma de arreglo.
-                       - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
-                       - Crea un método estático que devuelva los géneros aceptados*.
-                       - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
-                       - Crea un método que devuelva toda la ficha técnica de la película.
+                       X- Valida que los géneros sean introducidos en forma de arreglo.
+                       X- Valida que los géneros introducidos esten dentro de los géneros aceptados*.
+                       X- Crea un método estático que devuelva los géneros aceptados*.
+                       X- Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
+                       X- Crea un método que devuelva toda la ficha técnica de la película.
                        - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
                      * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
                      */
@@ -344,6 +344,47 @@
           this.validarDirector(director)
           this.validarEstreno(estreno)
           this.validarPais(pais)
+          this.validarGeneros(generos)
+          this.validarCalificacion(calificacion)
+        }
+
+        static get listaGeneros() {
+          return [
+            'Action',
+            'Adult',
+            'Adventure',
+            'Animation',
+            'Biography',
+            'Comedy',
+            'Crime',
+            'Documentary',
+            'Drama',
+            'Family',
+            'Fantasy',
+            'Film Noir',
+            'Game-Show',
+            'History',
+            'Horror',
+            'Musical',
+            'Music',
+            'Mystery',
+            'News',
+            'Reality-TV',
+            'Romance',
+            'Sci-Fi',
+            'Short',
+            'Sport',
+            'Talk-Show',
+            'Thriller',
+            'War',
+            'Western',
+          ]
+        }
+
+        static generosAceptados() {
+          return console.info(
+            `Los géneros aceptados son: ${Pelicula.listaGeneros.join(', ')}`
+          )
         }
 
         validarCadena(propiedad, valor) {
@@ -420,17 +461,88 @@
             }
           }
         }
+
+        validarGeneros(generos) {
+          if (this.validarFormaArreglo('Género/s', generos)) {
+            for (const genero of generos) {
+              if (typeof genero !== 'string') {
+                console.error(
+                  `Este valor del array: ${generos} NO es un string`
+                )
+              }
+              if (!Pelicula.listaGeneros.includes(genero)) {
+                console.error(
+                  `Género(s) incorrectos: "${genero}" [${generos.join(', ')}]`
+                )
+              }
+            }
+          }
+        }
+
+        validarCalificacion(calificacion) {
+          if (this.validarNumero('Calificación', calificacion)) {
+            return calificacion < 0 || calificacion > 10
+              ? console.error(
+                  'La calificación tiene que estar en un rango entre 0 y 10'
+                )
+              : (this.calificacion = calificacion.toFixed(1))
+          }
+        }
+
+        fichaTecnica() {
+          console.info(
+            `Ficha Técnica:\nTítulo: "${this.titulo}"\nDirector:"${
+              this.director
+            }"\nAño: "${this.estreno}"\nPaís: "${this.pais.join(
+              '-'
+            )}"\nGéneros: "${this.generos.join(', ')}"\nCalificación: "${
+              this.calificacion
+            }\nIMDB Id: "${this.id}"`
+          )
+        }
       }
 
-      const peli = new Pelicula({
+      /* const peli = new Pelicula({
         id: 'tt1234567',
         titulo: 'Terminator 5',
         director: 'Quentin Tarantino',
         estreno: 1995,
-        pais: ['Francia', 02],
-      })
+        pais: ['Francia', 'EEUU'],
+        generos: ['Action', 'Comedy'],
+        calificacion: 7.789,
+      }) */
 
-      const stringeeer = 'hola'
+      const arregloPeliculas = [
+        {
+          id: 'tt0110912',
+          titulo: 'Pulp Fiction',
+          director: 'Quentin Tarantino',
+          estreno: 1994,
+          pais: ['USA'],
+          generos: ['Crime', 'Drama'],
+          calificacion: 8.9,
+        },
+        {
+          id: 'tt0062622',
+          titulo: '2001: A Space Odyssey',
+          director: 'Stanley Kubrick',
+          estreno: 1968,
+          pais: ['UK', 'USA'],
+          generos: ['Adventure', 'Sci-Fi'],
+          calificacion: 8.3,
+        },
+        {
+          id: 'tt0479143',
+          titulo: 'Rocky Balboa',
+          director: 'Sylvester Stallone',
+          estreno: 2006,
+          pais: ['USA'],
+          generos: ['Action', 'Drama', 'Sport'],
+          calificacion: 7.1,
+        },
+      ]
+
+      arregloPeliculas.forEach((peli) => new Pelicula(peli).fichaTecnica())
     </script>
   </body>
 </html>
