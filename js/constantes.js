@@ -3,10 +3,10 @@ export const PI = Math.PI
 
 export const usuario = 'Jon'
 
-const password = 'qwerty'
+// const password = 'qwerty'
 // export default password;
 
-const hello = () => console.log('Hola')
+// const hello = () => console.log('Hola')
 
 export default function saludar() {
   console.log('Hola Módulos +ES6')

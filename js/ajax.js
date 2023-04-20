@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 // (() => { //AJAX usando el objeto XMLHttpRequest();
 //   const xhr = new XMLHttpRequest(),
 //   $xhr = document.getElementById("xhr"),
