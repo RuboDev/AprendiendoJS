@@ -136,8 +136,8 @@ video {
   color: var(--second-color);
   background-color: var(--main-modal-color);
 }
-/*
-/* **********     Eventos del Teclado     ********** 
+
+/* **********     Eventos del Teclado     ********** */
 
 .stage {
   display: flex;
