@@ -17,6 +17,6 @@ document.addEventListener('keydown', (e) => {
 
 countdown(
   '.countdown', // selector del elemento que contendrá la cuenta atrás
-  '2023-04-29T21:00:00', // Fecha límite
+  '2023-04-29T22:00:00', // Fecha límite
   'YAYY, terminó la cuenta atrás! Ha llegado el momento.' // Mensaje a mostrar cuando se llegue a esa fecha
 )
